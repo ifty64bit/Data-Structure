@@ -50,44 +50,24 @@ public:
 
     void deQ()
     {
-        if(head!=NULL)
+        if(head->prev==NULL && head->next==NULL)
         {
-            int data;
-            cout<<"Enter Element To Delete: ";
-            cin>>data;
-            Node *temp=search(data);
-            Node *tempPre=temp->prev;
-            Node *tempNex=temp->next;
-            if (temp->data==head->data && head->next==NULL)
-            {
-                head=NULL;
-                delete temp;
-            }
-            
-            else if(temp->data==head->data)
-            {
-                head=temp->next;
-                head->prev=NULL;
-                delete temp;
-            }
-            else if (temp->data==tail->data)
-            {
-                tail=tail->prev;
-                tail->next=NULL;
-                delete temp;
-            }
-            else
-            {
-                tempPre->next=tempNex;
-                tempNex->prev=tempPre;
-                delete temp;
-            }
+            head=NULL;
+            delete head;
+
+            cout<<"Executed First if"<<endl;
         }
-        else
+        else if(head!=NULL)
         {
+            Node *temp=head;
+            head=head->next;
+            head->prev=NULL;
+            delete temp;
+            cout<<"Executed 2nd if"<<endl;
+        }
+        else{
             cout<<"List is Empty"<<endl;
         }
-        
     }
 
     Node* search(int data)
